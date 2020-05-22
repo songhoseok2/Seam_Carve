@@ -6,7 +6,19 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__, static_folder="static")
 app.config["UPLOAD_FOLDER"] = os.path.join(APP_ROOT, "static/uploaded_images").replace('\\', '/')
 app.config["MAX_CONTENT_PATH"] = 500 * 1024 * 1024
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 @app.route('/')
 def homepage():
@@ -32,7 +44,7 @@ def upload():
         print("DEBUG: target:", target, flush=True)
         print("DEBUG: filename:", uploaded_image.filename, flush=True)
         print("DEBUG: destination:", destination, flush=True)
-        return render_template("upload_complete.html", uploaded_image_url="static/uploaded_images/" + uploaded_image.filename)
+        return render_template("upload_complete.html", uploaded_image_filename=uploaded_image.filename)
     else:
         return render_template("upload_complete.html")
 

@@ -9,10 +9,16 @@
     <meta charset="UTF-8">
     <title>Upload</title>
 </head>
-<body>
-    {% if uploaded_image_url %}
+<body class="mouse_lift_area">
+    {% if uploaded_image_filename %}
         <p>upload complete</p>
-        <img class="resizable" src="{{ uploaded_image_url }}">
+        <img class="resizable_img" src="{{ url_for('static', filename='uploaded_images/' +  uploaded_image_filename) }}">
+        <br><br><br><br>
+        <img id="carved_img_id">
+        <br><br><br><br>
+        <img class="resizable_img" src="{{ url_for('static', filename='uploaded_images/' +  uploaded_image_filename) }}">
+
+
     {% else %}
         <p> You have not uploaded an image from the homepage.</p>
     {% endif %}

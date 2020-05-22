@@ -1,9 +1,14 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
 p
 {
     font-size: 100px;
 }
 
-.resizable
+.resizable_img
 {
   display: inline-block;
   background: red;
