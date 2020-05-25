@@ -34,10 +34,11 @@ def about():
 def process():
     requested_img_name = request.form["img_name"]
     width_scale = request.form["width_scale"]
+    height_scale = request.form["height_scale"]
     print("DEBUG: request:", request, flush=True)
     print("DEBUG: requested_img_name:", requested_img_name, flush=True)
     print("DEBUG: width_scale:", width_scale, flush=True)
-    seam_carve(requested_img_name, width_scale)
+    seam_carve(requested_img_name, height_scale, width_scale)
 
     return Response('', status=200, mimetype='application/json')
 

@@ -1,11 +1,12 @@
-# code from Karthik Karanth's blog:
+# seam carve algorithm and code from Karthik Karanth's blog:
 # https://karthikkaranth.me/blog/implementing-seam-carving-with-python/
 
-# import sys
-# from tqdm import trange
+import numba
+from tqdm import trange
 import numpy as np
 from imageio import imread, imwrite
 from scipy.ndimage.filters import convolve
+from math import floor
 import os
 
 def calc_energy(img):
@@ -35,6 +36,7 @@ def calc_energy(img):
 
     return energy_map
 
+@numba.jit
 def minimum_seam(img):
     r, c, _ = img.shape
     energy_map = calc_energy(img)
@@ -58,6 +60,7 @@ def minimum_seam(img):
 
     return M, backtrack
 
+@numba.jit
 def carve_column(img):
     r, c, _ = img.shape
 
@@ -91,12 +94,18 @@ def crop_c(img, scale_c):
     r, c, _ = img.shape
     new_c = int(scale_c * c)
 
-    for i in range(c - new_c): # use range if you don't want to use tqdm
+    for i in trange(c - new_c): # use range if you don't want to use tqdm
         img = carve_column(img)
 
     return img
 
-def seam_carve(original_img_name, scale):
+def crop_r(img, scale_r):
+    img = np.rot90(img, 1, (0, 1))
+    img = crop_c(img, scale_r)
+    img = np.rot90(img, 3, (0, 1))
+    return img
+
+def seam_carve(original_img_name, scale_r, scale_c):
     img_title, file_extension = original_img_name.split('.')
     carved_img_name = img_title + "_carved." + file_extension
     APP_ROOT = os.path.dirname(os.path.abspath(__file__)).replace('\\', '/')
@@ -104,6 +113,14 @@ def seam_carve(original_img_name, scale):
     print("DEBUG: image_path:", image_path, flush=True)
 
     img = imread(image_path + '/' + original_img_name)
-    out = crop_c(img, float(scale))
-    print("DEBUG: carved_img_name:", carved_img_name, flush=True)
+
+    rounded_scale_c = floor(float(scale_c) * 10000) / 10000.0
+    rounded_scale_r = floor(float(scale_r) * 10000) / 10000.0
+
+    print("DEBUG: rounded scale_r: ", float(rounded_scale_r), flush=True)
+    print("DEBUG: rounded scale_c: ", float(rounded_scale_c), flush=True)
+    print("DEBUG: seam carving...", flush=True)
+    out = crop_c(img, rounded_scale_c)
+    out = crop_r(out, rounded_scale_r)
+    print("DEBUG: carving done. carved_img_name:", carved_img_name, flush=True)
     imwrite(image_path + '/' + carved_img_name, out)

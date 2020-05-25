@@ -7,8 +7,8 @@ $(document).ready(
         var img_current_width;
         var img_current_height;
         var uploaded_img = $(".resizable_img");
-        var src = $('img').attr('src').split('/');
-        var uploaded_img_name = src[src.length - 1];
+        var splitted = $('img').attr('src').split('/');
+        var uploaded_img_name = splitted[splitted.length - 1];
         console.log("uploaded_img_name: " + uploaded_img_name);
 
         uploaded_img.on('load',function(){
@@ -28,26 +28,40 @@ $(document).ready(
         $(".mouse_lift_area").mouseup(
         function()
         {
-            img_current_width = uploaded_img.width();
-            img_current_height = uploaded_img.height();
-            console.log("width=" + img_current_width + ", " + "height=" + img_current_height);
-            $.ajax({
-                type: "POST",
-                url: SERVER_URL + "/process",
-                data:
-                { 
-                    "img_name": uploaded_img_name,
-                    "width_scale": img_current_width / img_original_width
-                },
-                success: function(msg){
-                    console.log("rescaling success");
-                    // and then in @app route ('/process'), get that img using uploaded_img_name, make a new image called
-                    // <original img name>_carved, and make make the actual carving. then make a get request in this current function
-                }
-            });
-            
+            if(!(img_current_width == uploaded_img.width() &&
+               img_current_height == uploaded_img.height()))
+            {
+                img_current_width = uploaded_img.width();
+                img_current_height = uploaded_img.height();
+                console.log("width=" + img_current_width + ", " + "height=" + img_current_height);
+                $.ajax({
+                    type: "POST",
+                    url: SERVER_URL + "/process",
+                    data:
+                    { 
+                        "img_name": uploaded_img_name,
+                        "width_scale": img_current_width / img_original_width,
+                        "height_scale": img_current_height / img_original_height
+                    },
+                    success: function()
+                    {
 
+                    },
+                    error: function ()
+                    {
 
+                    },
+                    complete: function ()
+                    {
+                        var original_image_path = $(".resizable_img").attr("src");
+                        console.log("original_image_path:" + original_image_path);
+                        splitted = original_image_path.split('.');
+                        var carved_image_path = splitted[0] + "_carved." + splitted[1];
+                        var d = new Date();
+                        $("#carved_img_id").attr("src", carved_image_path + "?" + d.getTime());
+                    }
+                });
+            }
         });
     }
 );
