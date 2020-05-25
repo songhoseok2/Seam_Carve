@@ -1,6 +1,7 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 from werkzeug.utils import secure_filename
+from seam_carve_algorithm import seam_carve
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__, static_folder="static")
@@ -28,6 +29,18 @@ def homepage():
 @app.route('/about')
 def about():
     return render_template("about.html", title="input_title")
+
+@app.route('/process', methods=['GET', 'POST'])
+def process():
+    requested_img_name = request.form["img_name"]
+    width_scale = request.form["width_scale"]
+    print("DEBUG: request:", request, flush=True)
+    print("DEBUG: requested_img_name:", requested_img_name, flush=True)
+    print("DEBUG: width_scale:", width_scale, flush=True)
+    seam_carve(requested_img_name, width_scale)
+
+    return Response('', status=200, mimetype='application/json')
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
