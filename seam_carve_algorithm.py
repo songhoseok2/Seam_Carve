@@ -8,6 +8,8 @@ from imageio import imread, imwrite
 from scipy.ndimage.filters import convolve
 from math import floor
 import os
+import warnings
+warnings.filterwarnings('ignore')
 
 def calc_energy(img):
     filter_du = np.array([
