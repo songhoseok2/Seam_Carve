@@ -9,6 +9,7 @@ $(document).ready(
         var uploaded_img = $(".resizable_img");
         var splitted = $('img').attr('src').split('/');
         var uploaded_img_name = splitted[splitted.length - 1];
+
         console.log("uploaded_img_name: " + uploaded_img_name);
 
         uploaded_img.on('load',function(){
@@ -21,8 +22,24 @@ $(document).ready(
                 maxWidth: img_original_width,
                 maxHeight: img_original_height,
                 minWidth: 10,
-                minHeight: 10
+                minHeight: 10,
+
+                resize: function(event, ui) {
+                    console.log("this: ");
+                    console.log($(this));
+                    $(this).position({
+                        of: $("#resizable_img_container_id"),
+                        my: "center center",
+                        at: "center center"
+                    })
+                }
             });
+
+            $(".ui-wrapper").position({
+                of: $("#resizable_img_container_id"),
+                my: "center center",
+                at: "center center"
+            })
         });
 
         $(".mouse_lift_area").mouseup(
@@ -33,12 +50,12 @@ $(document).ready(
             {
                 img_current_width = uploaded_img.width();
                 img_current_height = uploaded_img.height();
-                console.log("width=" + img_current_width + ", " + "height=" + img_current_height);
+                console.log("img_name: " + uploaded_img_name + "width=" + img_current_width + ", " + "height=" + img_current_height);
                 $.ajax({
                     type: "POST",
                     url: SERVER_URL + "/process",
                     data:
-                    { 
+                    {
                         "img_name": uploaded_img_name,
                         "width_scale": img_current_width / img_original_width,
                         "height_scale": img_current_height / img_original_height

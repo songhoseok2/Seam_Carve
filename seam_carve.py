@@ -58,9 +58,9 @@ def upload():
         print("DEBUG: target:", target, flush=True)
         print("DEBUG: filename:", uploaded_image.filename, flush=True)
         print("DEBUG: destination:", destination, flush=True)
-        return render_template("upload_complete.html", uploaded_image_filename=uploaded_image.filename)
+        return render_template("carving_page.html", uploaded_image_filename=uploaded_image.filename)
     else:
-        return render_template("upload_complete.html")
+        return render_template("carving_page.html")
 
 
 

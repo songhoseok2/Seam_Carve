@@ -17,20 +17,15 @@ h1
   margin-bottom: 100px;
 }
 
-.upload_page_container
+.page_container
 {
   text-align: center;
   overflow: auto;
 }
 
-.container
-{
-  justify-content: center;
-  justify-items: center;
-}
-
 .flexbox_container {
   display: flex;
+  flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
   border: solid;
@@ -44,9 +39,8 @@ h1
 
 .resizable_img
 {
-  display: inline-block;
-  background: red;
   resize: both;
-  overflow: hidden;
-  line-height: 0;
+  overflow: auto;
+  width: inherit;
+  height: inherit;
 }

@@ -108,6 +108,7 @@ def crop_r(img, scale_r):
     return img
 
 def seam_carve(original_img_name, scale_r, scale_c):
+    print("DEBUG: original_img_name:", original_img_name, flush=True)
     img_title, file_extension = original_img_name.split('.')
     carved_img_name = img_title + "_carved." + file_extension
     APP_ROOT = os.path.dirname(os.path.abspath(__file__)).replace('\\', '/')

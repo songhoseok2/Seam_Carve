@@ -11,14 +11,13 @@
 </head>
 <body class="mouse_lift_area">
     {% if uploaded_image_filename %}
-        <p>upload complete</p>
-        <img class="resizable_img" src="{{ url_for('static', filename='uploaded_images/' +  uploaded_image_filename) }}">
-        <br><br><br><br>
-        <img id="carved_img_id">
-        <br><br><br><br>
+    <div class="page_container">
+        <div class="flexbox_container">
+            <div class="same_height_col" id="resizable_img_container_id"><img class="resizable_img" src="{{ url_for('static', filename='uploaded_images/' +  uploaded_image_filename) }}"></div>
+            <div class="same_height_col"><img id="carved_img_id"></div>
+        </div>
         <img src="{{ url_for('static', filename='uploaded_images/' +  uploaded_image_filename) }}">
-
-
+    </div>
     {% else %}
         <p> You have not uploaded an image from the homepage.</p>
     {% endif %}
