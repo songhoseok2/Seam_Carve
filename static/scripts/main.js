@@ -48,6 +48,8 @@ $(document).ready(
             if(!(img_current_width == uploaded_img.width() &&
                img_current_height == uploaded_img.height()))
             {
+                $("#carved_img_id").attr("src", "/static/sample_images/processing.png");
+
                 img_current_width = uploaded_img.width();
                 img_current_height = uploaded_img.height();
                 console.log("img_name: " + uploaded_img_name + "width=" + img_current_width + ", " + "height=" + img_current_height);

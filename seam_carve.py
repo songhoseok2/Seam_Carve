@@ -26,10 +26,6 @@ def homepage():
     print("DEBUG: hello", flush=True)
     return render_template("upload.html")
 
-@app.route('/about')
-def about():
-    return render_template("about.html", title="input_title")
-
 @app.route('/process', methods=['GET', 'POST'])
 def process():
     requested_img_name = request.form["img_name"]

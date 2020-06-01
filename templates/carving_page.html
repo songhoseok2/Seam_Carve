@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -12,10 +13,30 @@
 <body class="mouse_lift_area">
     {% if uploaded_image_filename %}
     <div class="page_container">
-        <div class="flexbox_container">
-            <div class="same_height_col" id="resizable_img_container_id"><img class="resizable_img" src="{{ url_for('static', filename='uploaded_images/' +  uploaded_image_filename) }}"></div>
-            <div class="same_height_col"><img id="carved_img_id"></div>
+        <p>
+            Click and drag your uploaded image on the left to perform a seam carving on it, or click
+            <a href="{{ url_for('homepage') }}">here</a> to go back to the upload page.
+        </p>
+        <p>Please note that large images take longer time to process.</p>
+
+        <div class="flexbox_container" style="margin-bottom: 0px;">
+            <div class="same_height_col">
+                <p>Your resized image</p>
+            </div>
+            <div class="same_height_col">
+                <p>Seam carved image</p>
+            </div>
         </div>
+
+        <div class="flexbox_container">
+            <div class="same_height_col" id="resizable_img_container_id">
+                <img class="resizable_img" src="{{ url_for('static', filename='uploaded_images/' +  uploaded_image_filename) }}">
+            </div>
+            <div class="same_height_col">
+                <img id="carved_img_id">
+            </div>
+        </div>
+        <p>Your original image</p>
         <img src="{{ url_for('static', filename='uploaded_images/' +  uploaded_image_filename) }}">
     </div>
     {% else %}
