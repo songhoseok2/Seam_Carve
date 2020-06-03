@@ -22,7 +22,7 @@ def add_header(r):
     return r
 
 @app.route('/')
-def homepage():
+def upload_page():
     print("DEBUG: hello", flush=True)
     return render_template("upload.html")
 
