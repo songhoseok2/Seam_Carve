@@ -1,3 +1,3 @@
-from seam_carve import homepage
+from seam_carve import upload_page
 
-app = homepage()
+app = upload_page()
