@@ -24,15 +24,15 @@ $(document).ready(
                 minWidth: 10,
                 minHeight: 10,
 
-                resize: function(event, ui) {
-                    console.log("this: ");
-                    console.log($(this));
-                    $(this).position({
-                        of: $("#resizable_img_container_id"),
-                        my: "center center",
-                        at: "center center"
-                    })
-                }
+                //uncomment this to make image stay in center
+                //even during the resizing
+                // resize: function(event, ui) {
+                //     $(this).position({
+                //         of: $("#resizable_img_container_id"),
+                //         my: "center center",
+                //         at: "center center"
+                //     })
+                // }
             });
 
             $(".ui-wrapper").position({
@@ -45,6 +45,12 @@ $(document).ready(
         $(".mouse_lift_area").mouseup(
         function()
         {
+            $(".ui-wrapper").position({
+                of: $("#resizable_img_container_id"),
+                my: "center center",
+                at: "center center"
+            })
+
             if(!(img_current_width == uploaded_img.width() &&
                img_current_height == uploaded_img.height()))
             {
