@@ -1,0 +1,7 @@
+werkzeug
+flask
+scipy
+imageio
+numpy
+tqdm
+numba
