@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 <link rel="stylesheet" href="/static/css/style.css">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function enableBtn()
+    {
+        document.getElementById("send_button").disabled = false;
+    }
+</script>
+
+
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +21,7 @@
     <div class="page_container">
         <h1>Seam Carving</h1>
 
-        <div class="flexbox_container">
+        <div class="flexbox_container" style="margin-bottom: 100px;">
             <div class="same_height_col">
                 <div class="description">
                     <p>
@@ -29,11 +38,14 @@
           </div>
 
         <form id="upload_form_id" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-            <div class ="flexbox_container">
+            <div class=recaptcha_container>
+                <div class="flexbox_container" style="margin-bottom: 25px;">
                     <input type="file" class="form-control-file" name="uploaded_image" accept="image/*" style="border-style: solid;">
-                    <button id="send_button" class="btn btn-info btn-lg" type="submit">
+                    <button id="send_button" class="btn btn-info" type="submit" disabled="true">
                         <span class="glyphicon glyphicon-upload"></span> Upload
-                    </button>    
+                    </button>
+                </div>
+                <div class="g-recaptcha" data-sitekey="6LdzfwAVAAAAAGbQNXovawzQfDWyAmzWzNod5SFd" data-callback="enableBtn"></div>
             </div>
         </form>
     </div>

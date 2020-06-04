@@ -18,12 +18,20 @@ h1
   overflow: auto;
 }
 
-.flexbox_container {
+.recaptcha_container
+{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexbox_container 
+{
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 100px;
 }
 
 .same_height_col {

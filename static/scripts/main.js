@@ -10,12 +10,12 @@ $(document).ready(
         var splitted = $('img').attr('src').split('/');
         var uploaded_img_name = splitted[splitted.length - 1];
 
-        console.log("uploaded_img_name: " + uploaded_img_name);
+        // console.log("uploaded_img_name: " + uploaded_img_name);
 
         uploaded_img.on('load',function(){
             img_original_width = uploaded_img.width();
             img_original_height = uploaded_img.height();
-            console.log("img original_width: " + img_original_width + ", " + "height: " + img_original_height);
+            // console.log("img original_width: " + img_original_width + ", " + "height: " + img_original_height);
 
             $(".resizable_img").resizable(
             {
@@ -58,7 +58,7 @@ $(document).ready(
 
                 img_current_width = uploaded_img.width();
                 img_current_height = uploaded_img.height();
-                console.log("img_name: " + uploaded_img_name + "width=" + img_current_width + ", " + "height=" + img_current_height);
+                // console.log("img_name: " + uploaded_img_name + "width=" + img_current_width + ", " + "height=" + img_current_height);
                 $.ajax({
                     type: "POST",
                     url: SERVER_URL + "/process",
@@ -79,7 +79,7 @@ $(document).ready(
                     complete: function ()
                     {
                         var original_image_path = $(".resizable_img").attr("src");
-                        console.log("original_image_path:" + original_image_path);
+                        // console.log("original_image_path:" + original_image_path);
                         splitted = original_image_path.split('.');
                         var carved_image_path = splitted[0] + "_carved." + splitted[1];
                         var d = new Date();
