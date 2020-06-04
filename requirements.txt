@@ -5,3 +5,6 @@ imageio
 numpy
 tqdm
 numba
+django
+gunicorn
+django-heroku
