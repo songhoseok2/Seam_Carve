@@ -8,8 +8,8 @@ h1
 {
   font-size: 50px;
   font-family: "Raleway";
-  margin-top: 20px;
-  margin-bottom: 45px;
+  margin-top: 50px;
+  margin-bottom: 100px;
 }
 
 .page_container
@@ -23,7 +23,7 @@ h1
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 }
 
 .same_height_col {
