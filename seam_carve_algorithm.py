@@ -108,22 +108,22 @@ def crop_r(img, scale_r):
     return img
 
 def seam_carve(original_img_name, scale_r, scale_c):
-    print("DEBUG: original_img_name:", original_img_name, flush=True)
+    # print("DEBUG: original_img_name:", original_img_name, flush=True)
     img_title, file_extension = original_img_name.split('.')
     carved_img_name = img_title + "_carved." + file_extension
     APP_ROOT = os.path.dirname(os.path.abspath(__file__)).replace('\\', '/')
     image_path = APP_ROOT + "/static/uploaded_images"
-    print("DEBUG: image_path:", image_path, flush=True)
+    # print("DEBUG: image_path:", image_path, flush=True)
 
     img = imread(image_path + '/' + original_img_name)
 
     rounded_scale_c = floor(float(scale_c) * 10000) / 10000.0
     rounded_scale_r = floor(float(scale_r) * 10000) / 10000.0
 
-    print("DEBUG: rounded scale_r: ", float(rounded_scale_r), flush=True)
-    print("DEBUG: rounded scale_c: ", float(rounded_scale_c), flush=True)
-    print("DEBUG: seam carving...", flush=True)
+    # print("DEBUG: rounded scale_r: ", float(rounded_scale_r), flush=True)
+    # print("DEBUG: rounded scale_c: ", float(rounded_scale_c), flush=True)
+    # print("DEBUG: seam carving...", flush=True)
     out = crop_c(img, rounded_scale_c)
     out = crop_r(out, rounded_scale_r)
-    print("DEBUG: carving done. carved_img_name:", carved_img_name, flush=True)
+    # print("DEBUG: carving done. carved_img_name:", carved_img_name, flush=True)
     imwrite(image_path + '/' + carved_img_name, out)

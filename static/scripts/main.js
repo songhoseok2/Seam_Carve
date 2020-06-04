@@ -1,7 +1,7 @@
 $(document).ready(
     function()
     {
-        var SERVER_URL = "http://localhost:5000";
+        var SERVER_URL = "https://ancient-chamber-87494.herokuapp.com;
         var img_original_width;
         var img_original_height;
         var img_current_width;
