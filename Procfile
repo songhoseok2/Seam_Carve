@@ -1,1 +1,1 @@
-web: gunicorn wsgi: upload_page
+web: gunicorn wsgi: app
