@@ -8,7 +8,12 @@
     function enableBtn()
     {
         document.getElementById("send_button").disabled = false;
-    }
+    };
+
+    function disableBtn()
+    {
+        document.getElementById("send_button").disabled = true;
+    };
 </script>
 
 
@@ -45,7 +50,7 @@
                         <span class="glyphicon glyphicon-upload"></span> Upload
                     </button>
                 </div>
-                <div class="g-recaptcha" data-sitekey="6LdzfwAVAAAAAGbQNXovawzQfDWyAmzWzNod5SFd" data-callback="enableBtn"></div>
+                <div class="g-recaptcha" data-sitekey="6LdzfwAVAAAAAGbQNXovawzQfDWyAmzWzNod5SFd" data-callback="enableBtn" expired-callback="disableBtn"></div>
             </div>
         </form>
     </div>
