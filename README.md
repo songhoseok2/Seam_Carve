@@ -1,5 +1,5 @@
 # Seam_Carve
-https://ancient-chamber-87494.herokuapp.com/
+Web Application Link: https://ancient-chamber-87494.herokuapp.com/
 
 This project was inspired from one of the University of Michigan's EECS 280 project. I wanted to give a better user interface to this interesting carving algorithm, and thus developed this web application using Flask. The application accepts an user uploaded image, then proceeds to the resizing page. There, the user resizes the displayed image, and whenever any change is made, the python program proceeds with the seam carving and returns the result to be uploaded to the server. The page then makes a GET request to the appropriate carved image to display the result in real time.
 
